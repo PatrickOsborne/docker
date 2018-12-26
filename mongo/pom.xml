@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>mongo</artifactId>
+  <packaging>pom</packaging>
+  <name>mongo docker container</name>
+  <description>mongo docker container</description>
+
+  <parent>
+    <groupId>org.ozzysoft.docker</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <maven.dependency.plugin.version>3.0.0</maven.dependency.plugin.version>
+    <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
+    <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
+    <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven.dependency.plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven.release.plugin.version}</version>
+          <configuration>
+            <releaseProfiles>docker</releaseProfiles>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven.deploy.plugin.version}</version>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
+        <version>${git.commit.plugin.version}</version>
+
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+          </execution>
+        </executions>
+
+        <configuration>
+          <verbose>true</verbose>
+          <skipPoms>false</skipPoms>
+
+          <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+          <injectAllReactorProjects>true</injectAllReactorProjects>
+
+          <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
+          <generateGitPropertiesFile>true</generateGitPropertiesFile>
+          <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+
+          <failOnNoGitDirectory>true</failOnNoGitDirectory>
+        </configuration>
+      </plugin>
+   </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>docker</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>pl.project13.maven</groupId>
+            <artifactId>git-commit-id-plugin</artifactId>
+            <version>${git.commit.plugin.version}</version>
+
+            <executions>
+              <execution>
+                <goals>
+                  <goal>revision</goal>
+                </goals>
+              </execution>
+            </executions>
+
+            <configuration>
+              <verbose>true</verbose>
+              <skipPoms>false</skipPoms>
+
+              <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+              <injectAllReactorProjects>true</injectAllReactorProjects>
+
+              <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
+              <generateGitPropertiesFile>true</generateGitPropertiesFile>
+              <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+
+              <failOnNoGitDirectory>true</failOnNoGitDirectory>
+            </configuration>
+          </plugin>
+
+          <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>${spotify.docker.plugin.version}</version>
+
+            <configuration>
+              <skipDocker>false</skipDocker>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>
