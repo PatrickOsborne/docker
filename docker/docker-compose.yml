@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mongo:
+    environment:
+      MONGO_PASSWORD: $MONGO_PASSWORD
+      MONGO_DB: $MONGO_DB
+    image: patrickosborne/mongo
+    restart: "no"
+    ports:
+      - 27017:27017
+    logging:
+      options:
+        max-size: "5m"
+        max-file: "10"
+
+  mongo-persisted:
+    environment:
+      MONGO_PASSWORD: $MONGO_PASSWORD
+      MONGO_DB: $MONGO_DB
+    image: patrickosborne/mongo
+    restart: "no"
+    volumes:
+      - /data/$MONGO_DB/mongo:/data/$MONGO_DB/mongo
+    ports:
+      - 27017:27017
+    logging:
+      options:
+        max-size: "5m"
+        max-file: "10"
