@@ -20,7 +20,7 @@ services:
     image: patrickosborne/mongo
     restart: "no"
     volumes:
-      - /data/$MONGO_DB/mongo:/data/$MONGO_DB/mongo
+      - /data/mongo/$MONGO_DB:/data/db
     ports:
       - 27017:27017
     logging:
