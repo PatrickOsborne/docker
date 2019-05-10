@@ -14,4 +14,4 @@ done
 
 PRGDIR=`dirname "$PRG"`
 
-docker-compose up
+docker-compose up mongo

@@ -9,7 +9,9 @@ During initialization users and databases are created
 ### Environment Variables
 
  * MONGO_DB: name of database to create
- * MONGO_PASSWORD: used as the password for all created users
+ * MONGO_ADMIN_PASSWORD: used as the password for mongo `admin` user
+ * MONGO_PASSWORD: used as the password for specified db user
+ * MONGO_CONF_PATH: path to mongo config file
 
  
 ### Users
@@ -29,7 +31,9 @@ Users are created with password provided as env variable $MONGO_PASSWORD.
 
 ### Data Storage
 
-Data is stored in `/data/${MONGO_DB}/mongo`
+In the container the data is stored under `/data/db`.
+
+The mongo-persisted entry in docker-compose writes the data to `/data/mongo/${MONGO_DB}`
 
 
 ## Build
