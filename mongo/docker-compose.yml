@@ -2,10 +2,14 @@ version: '3'
 services:
   mongo:
     environment:
+      MONGO_ADMIN_PASSWORD: $MONGO_ADMIN_PASSWORD
       MONGO_PASSWORD: $MONGO_PASSWORD
       MONGO_DB: $MONGO_DB
+      MONGO_CONF_PATH: /mongo-conf/mongod.conf
     image: patrickosborne/mongo
     restart: "no"
+    volumes:
+      - /Users/ozzy/osoft/docker/mongo/mongod.conf:/mongo-config/mongod.conf
     ports:
       - 27017:27017
     logging:
@@ -15,12 +19,15 @@ services:
 
   mongo-persisted:
     environment:
+      MONGO_ADMIN_PASSWORD: $MONGO_ADMIN_PASSWORD
       MONGO_PASSWORD: $MONGO_PASSWORD
       MONGO_DB: $MONGO_DB
+      MONGO_CONF_PATH: /mongo-conf/mongod.conf
     image: patrickosborne/mongo
     restart: "no"
     volumes:
-      - /data/mongo/$MONGO_DB:/data/db
+      - /data/mongodocker/$MONGO_DB:/data/db
+      - /Users/ozzy/osoft/docker/mongo/mongod.conf:/mongo-config/mongod.conf
     ports:
       - 27017:27017
     logging:
