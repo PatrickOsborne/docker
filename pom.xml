@@ -13,7 +13,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <docker.image.prefix>patrickosborne</docker.image.prefix>
+<!--    <docker.image.prefix>patrickosborne</docker.image.prefix>-->
+    <docker.image.prefix>gcr.io/crossbow-v1</docker.image.prefix>
 
     <!-- plugins -->
     <resources.plugin.version>2.4</resources.plugin.version>
