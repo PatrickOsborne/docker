@@ -40,7 +40,6 @@ killall -9 mongod
 
 
 echo "starting mongodb without security"
-chown -R mongodb "/data/${MONGO_DB}/mongo"
 gosu mongodb mongod --port ${tempPort} "$@"
 
 echo "restarting mongodb with authentication enabled"

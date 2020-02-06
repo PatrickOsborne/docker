@@ -1,4 +1,4 @@
-FROM mongo:3.6.9
+FROM mongo:3.6.17-xenial
 
 ADD init.sh /init.sh
 
