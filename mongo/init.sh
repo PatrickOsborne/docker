@@ -10,6 +10,10 @@ if test -z "$MONGO_DB"; then
     exit 8
 fi
 
+id
+mount
+df -h
+
 # start mongo with a temporary port first time, before configuring security, so apps polling and waiting for server to be ready on
 # standard port wont be confused.
 tempPort=30729
