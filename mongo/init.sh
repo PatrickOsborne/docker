@@ -10,6 +10,10 @@ if test -z "$MONGO_DB"; then
     exit 8
 fi
 
+id
+mount
+df -h
+
 # start mongo with a temporary port first time, before configuring security, so apps polling and waiting for server to be ready on
 # standard port wont be confused.
 tempPort=30729
@@ -40,7 +44,6 @@ killall -9 mongod
 
 
 echo "starting mongodb without security"
-chown -R mongodb "/data/${MONGO_DB}/mongo"
 gosu mongodb mongod --port ${tempPort} "$@"
 
 echo "restarting mongodb with authentication enabled"
